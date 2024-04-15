@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  nodejs-app:
+    build:
+      context: .
+      dockerfile: deployments/Dockerfile
+    command: cmd/run.sh
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/opt/pyro

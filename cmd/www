@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+const express = require("express"),
+    app = express(),
+    path = require("path"),
+    PORT = 8080;
+
+app.use(express.static('.'));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname + "/index.html"));
+});
+
+app.listen(PORT, () => console.log(`http://localhost:${PORT}/ `));
