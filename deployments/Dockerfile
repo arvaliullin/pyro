@@ -1,20 +1,19 @@
-# Используем официальный образ Node.js в качестве базового образа
-FROM node:latest
+FROM golang:latest
 
-# Устанавливаем рабочую директорию внутри контейнера
+RUN apt update && apt install --yes curl build-essential
+
+RUN apt install --yes nodejs npm
+
 WORKDIR /opt/pyro
 
-# Копируем файл package.json и package-lock.json для установки зависимостей
 COPY package*.json ./
 
-# Устанавливаем зависимости
+RUN npm install -g bun
+
 RUN npm install
 
-# Копируем исходный код приложения в контейнер
 COPY . .
 
-# Определяем порт, на котором будет работать приложение
 EXPOSE 8080
 
-# Команда для запуска приложения при старте контейнера
 CMD [ "npm", "start" ]
