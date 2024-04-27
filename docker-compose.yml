@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: deployments/Dockerfile
-    command: cmd/bench.sh
+    command: cmd/run.sh
     ports:
       - "8080:8080"
     volumes:
