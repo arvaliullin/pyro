@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"syscall/js"
+	"time"
 )
 
 func fact(n int) int {
@@ -23,6 +25,7 @@ func f(x float64) float64 {
 }
 
 func Integrate(xmin float64, xmax float64, intervals_count int) float64 {
+	start := time.Now()
 	dx := (xmax - xmin) / float64(intervals_count)
 	total := 0.0
 	x := xmin
@@ -31,6 +34,9 @@ func Integrate(xmin float64, xmax float64, intervals_count int) float64 {
 		total = total + dx*(f(x)+f(x+dx))/2.0
 		x = x + dx
 	}
+	elapsed := time.Since(start)
+
+	log.Printf("Go Time Perfomance %s", elapsed)
 
 	return total
 }

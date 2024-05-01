@@ -5,7 +5,7 @@
   "description": "",
   "scripts": {
     "start": "node cmd/www",
-    "helloworld": "node examples/helloworld/index.js"
+    "benchmark": "bash cmd/bench.sh"
   },
   "dependencies": {
     "express": "^4.19.2"
