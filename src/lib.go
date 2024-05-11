@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
+	"pyro/internal/shapes"
 	"syscall/js"
 	"time"
 )
@@ -48,6 +50,10 @@ func x2Integrate(this js.Value, args []js.Value) interface{} {
 	return Integrate(xmin, xmax, intervals_count)
 }
 
+func Calculate(s shapes.Shape) float64 {
+	return s.Area()
+}
+
 func main() {
 	fmt.Println("Creating WebAssembly code from Go!")
 
@@ -59,6 +65,18 @@ func main() {
 	}))
 
 	js.Global().Set("x2Integrate", js.FuncOf(x2Integrate))
+
+	c := shapes.Circle{R: 12.0}
+	s := shapes.Square{X: 5.0}
+	r := shapes.Rectangle{X: 12.0, Y: 5.0}
+
+	fmt.Printf("Circle: %v\n", Calculate(c))
+	fmt.Printf("Square: %v\n", Calculate(s))
+	fmt.Printf("Rectangle: %v\n", Calculate(r))
+
+	rMarshaled, _ := json.Marshal(r)
+
+	fmt.Printf("Rectangle: %v\n", string(rMarshaled))
 
 	select {}
 }

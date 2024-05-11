@@ -5,7 +5,8 @@
   "description": "",
   "scripts": {
     "start": "node cmd/www",
-    "benchmark": "bash cmd/bench.sh"
+    "benchmark": "bash cmd/bench.sh",
+    "shapes": "go run pyro/cmd/shapes"
   },
   "dependencies": {
     "express": "^4.19.2"
