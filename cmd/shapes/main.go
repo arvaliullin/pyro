@@ -6,6 +6,8 @@ import (
 	"pyro/internal/shapes"
 )
 
+var Global int = 1234
+
 func Calculate(s shapes.Shape) float64 {
 	return s.Area()
 }
