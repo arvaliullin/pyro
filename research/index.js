@@ -28,7 +28,7 @@ export function runCalc(){
     let t0 = performance.now();
     let value = globalThis.x2Integrate(0.0, 100.0, 10000);
     let t1 = performance.now();
-    console.log(`Perfomance go:\t ${(t1 - t0).toFixed(4)} milliseconds`)
+    console.log(`Performance go:\t ${(t1 - t0).toFixed(4)} milliseconds`)
     console.log(`Value go:\t ${value}`);
 }
 
