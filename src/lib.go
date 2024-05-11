@@ -49,6 +49,8 @@ func x2Integrate(this js.Value, args []js.Value) interface{} {
 }
 
 func main() {
+	fmt.Println("Creating WebAssembly code from Go!")
+
 	js.Global().Set("greet", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		if len(args) == 0 {
 			return "Hello, World!"
