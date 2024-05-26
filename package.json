@@ -4,7 +4,7 @@
   "private": true,
   "description": "",
   "scripts": {
-    "start": "node cmd/www",
+    "start": "bun cmd/www",
     "benchmark": "bash cmd/bench.sh",
     "shapes": "go run pyro/cmd/shapes"
   },

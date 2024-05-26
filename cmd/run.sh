@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-npm install
-npm run benchmark
-npm run shapes
-npm start
+bun install
+bun run benchmark
+bun run shapes
+bun start

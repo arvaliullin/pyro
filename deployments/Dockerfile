@@ -1,19 +1,18 @@
 FROM golang:latest
 
-RUN apt update && apt install --yes curl build-essential
+RUN apt update && apt install --yes curl build-essential unzip
 
-RUN apt install --yes nodejs npm
+ENV BUN_INSTALL="/usr/local"
+RUN curl -fsSL https://bun.sh/install | bash
 
 WORKDIR /opt/pyro
 
 COPY package*.json ./
 
-RUN npm install -g bun
-
-RUN npm install
+RUN bun install
 
 COPY . .
 
 EXPOSE 8080
 
-CMD [ "npm", "start" ]
+CMD [ "bun", "start" ]
