@@ -1,3 +1,0 @@
-cmd/run.sh text eol=lf
-cmd/bench.sh text eol=lf
-cmd/www text eol=lf

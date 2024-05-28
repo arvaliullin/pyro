@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: deployments/Dockerfile
-    command: cmd/run.sh
+    command: /opt/pyro/service /opt/pyro/public
     ports:
       - "8080:8080"
-    volumes:
-      - .:/opt/pyro
