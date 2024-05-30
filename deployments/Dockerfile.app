@@ -1,7 +1,7 @@
 FROM golang:latest
 
 RUN apt update && apt upgrade -y
-RUN apt install --yes curl build-essential unzip
+RUN apt install --yes curl unzip
 
 ENV BUN_INSTALL="/usr/local"
 

@@ -1,0 +1,34 @@
+# Используем образ с поддержкой Golang
+FROM golang:latest AS build
+
+# Устанавливаем необходимые пакеты
+RUN apt update && apt upgrade -y && apt install --yes curl unzip
+
+# Устанавливаем Bun
+ENV BUN_INSTALL="/usr/local"
+RUN curl -fsSL https://bun.sh/install | bash
+
+# Рабочая директория
+WORKDIR /opt/build
+
+# Копируем исходный код
+COPY . .
+
+# Запускаем скрипт установки
+RUN /opt/build/scripts/install.sh
+
+# Собираем проект
+
+# Новый образ для запуска Nginx
+FROM nginx:latest
+
+# Копируем собранные статические файлы от bun в Nginx
+COPY --from=build /opt/pyro/public /usr/share/nginx/html
+
+RUN chmod -R 755 /usr/share/nginx/html
+
+# Добавляем кастомный nginx.conf
+COPY deployments/nginx.conf /etc/nginx/nginx.conf
+
+# Запускаем Nginx
+CMD ["nginx", "-g", "daemon off;"]

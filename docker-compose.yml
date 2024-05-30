@@ -4,7 +4,13 @@ services:
   pyro-app:
     build:
       context: .
-      dockerfile: deployments/Dockerfile
+      dockerfile: deployments/Dockerfile.app
     command: /opt/pyro/service /opt/pyro/public
     ports:
       - "8080:8080"
+  pyro-nginx:
+    build:
+      context: .
+      dockerfile: deployments/Dockerfile.nginx
+    ports:
+      - "8081:80"
