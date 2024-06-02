@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -24,6 +25,19 @@ func main() {
 			h.ServeHTTP(w, r)
 		})
 	}
+
+	http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+		response := map[string]string{"value": "pong"}
+		responseJSON, err := json.Marshal(response)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(responseJSON)
+	})
 
 	fmt.Printf("Сервер запущен на http://localhost:8080 и обслуживает статические файлы из директории: %s\n", dir)
 	http.ListenAndServe(":8080", cors(http.DefaultServeMux))
