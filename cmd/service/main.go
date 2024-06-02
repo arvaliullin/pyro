@@ -13,7 +13,9 @@ func main() {
 		return
 	}
 
-	dir := os.Args[1] // Путь к директории с статическими файлами передается первым аргументом командной строки
+	// Путь к директории с статическими файлами
+	// передается первым аргументом командной строки
+	dir := os.Args[1]
 
 	fs := http.FileServer(http.Dir(dir))
 	http.Handle("/", fs)
@@ -39,6 +41,5 @@ func main() {
 		w.Write(responseJSON)
 	})
 
-	fmt.Printf("Сервер запущен на http://localhost:8080 и обслуживает статические файлы из директории: %s\n", dir)
 	http.ListenAndServe(":8080", cors(http.DefaultServeMux))
 }
