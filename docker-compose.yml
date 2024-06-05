@@ -8,9 +8,18 @@ services:
     command: /opt/pyro/service /opt/pyro/public
     ports:
       - "8080:8080"
+    networks:
+      - pyro_network
+
   pyro-nginx:
     build:
       context: .
       dockerfile: deployments/Dockerfile.nginx
     ports:
       - "8081:80"
+    networks:
+      - pyro_network
+
+networks:
+  pyro_network:
+    driver: bridge
