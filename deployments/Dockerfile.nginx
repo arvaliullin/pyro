@@ -15,7 +15,7 @@ WORKDIR /opt/build
 COPY . .
 
 # Запускаем скрипт установки
-RUN /opt/build/scripts/install.sh
+RUN /usr/bin/bash /opt/build/scripts/install.sh
 
 # Собираем проект
 
