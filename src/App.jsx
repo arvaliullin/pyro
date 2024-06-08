@@ -5,7 +5,6 @@ import { multiply } from "./math/multiply.js";
 
 function App() {
   const [result, setResult] = useState(0.0);
-  const [pingValue, setPingValue] = useState("Try Ping ...");
 
   useEffect(() => {
     async function load() {
@@ -22,32 +21,15 @@ function App() {
   }, []);
 
   const recalculate = async () => {
-    let t0 = performance.now();
-    let value = globalThis.x2Integrate(0.0, 100.0, 10000);
-    let t1 = performance.now();
-    console.log(`Performance go:\t ${(t1 - t0).toFixed(4)} milliseconds`);
-    console.log(`Value go:\t ${value}`);
-    setResult(value.toFixed(2));
-
-    value = multiply(10, 12, 5);
+    let value = globalThis.multiply(10, 12, 5);
     setResult(value);
-  };
-
-  const ping = async () => {
-    fetch("/ping").then((response) => {
-      response.json().then((data) => {
-        let value = data["value"];
-        setPingValue(value);
-      });
-    });
   };
 
   return (
     <>
       <h1>Научно-исследовательская работа</h1>
       <div className="card">
-        <button onClick={ping}>Ping is {pingValue}</button>
-        <button onClick={recalculate}>x2Integrate result: {result}</button>
+        <button onClick={recalculate}>Multiply result: {result}</button>
       </div>
     </>
   );
