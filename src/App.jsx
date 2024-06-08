@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import "./wasm_exec.js";
+import { multiply } from "./math/multiply.js";
 
 function App() {
   const [result, setResult] = useState(0.0);
@@ -27,6 +28,9 @@ function App() {
     console.log(`Performance go:\t ${(t1 - t0).toFixed(4)} milliseconds`);
     console.log(`Value go:\t ${value}`);
     setResult(value.toFixed(2));
+
+    value = multiply(10, 12, 5);
+    setResult(value);
   };
 
   const ping = async () => {
