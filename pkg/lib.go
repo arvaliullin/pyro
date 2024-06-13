@@ -17,7 +17,6 @@ func fibonacciIterative(this js.Value, args []js.Value) interface{} {
 }
 
 func multiply(this js.Value, args []js.Value) interface{} {
-	fmt.Println("call func multiply(this js.Value, args []js.Value) interface{}")
 	a := args[0].Int()
 	b := args[1].Int()
 	size := args[2].Int()
