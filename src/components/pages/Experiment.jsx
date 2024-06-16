@@ -1,14 +1,16 @@
-import { VictoryChart, VictoryBar, VictoryAxis } from 'victory';
 import { useParams } from 'react-router-dom';
+import PerformanceTable from "../table/PerfomanceTable.jsx";
+import ChartComponent from "../charts/ChartComponent.jsx";
 
 
 function Experiment() {
-    const data = [
-        {quarter: 1, earnings: 13000},
-        {quarter: 2, earnings: 16500},
-        {quarter: 3, earnings: 14250},
-        {quarter: 4, earnings: 19000}
-    ]
+    const tableData = [
+        { N: 10, JavaScript: 50, WebAssembly: 20 },
+        { N: 20, JavaScript: 40, WebAssembly: 15 },
+        { N: 30, JavaScript: 35, WebAssembly: 10 },
+        { N: 40, JavaScript: 30, WebAssembly: 10 },
+        { N: 50, JavaScript: 25, WebAssembly: 5 }
+    ];
 
     const { experimentId } = useParams();
 
@@ -16,28 +18,8 @@ function Experiment() {
         <>
             <h1> Экперимент {experimentId} </h1>
             <div className="card">
-                <VictoryChart
-                    // domainPadding will add space to each side of VictoryBar to
-                    // prevent it from overlapping the axis
-                    domainPadding={20}
-                >
-                    <VictoryAxis
-                        // tickValues specifies both the number of ticks and where
-                        // they are placed on the axis
-                        tickValues={[1, 2, 3, 4]}
-                        tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
-                    />
-                    <VictoryAxis
-                        dependentAxis
-                        // tickFormat specifies how ticks should be displayed
-                        tickFormat={(x) => (`$${x / 1000}k`)}
-                    />
-                    <VictoryBar
-                        data={data}
-                        x="quarter"
-                        y="earnings"
-                    />
-                </VictoryChart>
+                <PerformanceTable tableData={tableData}/>
+                <ChartComponent tableData={tableData} />
             </div>
         </>
     );

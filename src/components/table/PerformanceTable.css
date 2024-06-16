@@ -1,0 +1,25 @@
+.performance-table {
+    margin-top: 20px;
+}
+
+.performance-table h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.performance-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.performance-table th,
+.performance-table td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.performance-table th {
+    background-color: #f2f2f2;
+}
