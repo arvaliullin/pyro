@@ -31,14 +31,14 @@ const performanceExperiments = {
     },
     multiply: {
         experimentName: "Функция перемножение целых чисел",
-        args: [500000, 600000, 700000, 800000],
+        args: [50000000, 60000000, 70000000, 80000000],
         calculatePerformance: function () {
             return measurePerformance(multiply, globalThis.multiply, this.args);
         }
     },
     multiplyVector: {
         experimentName: "Функция перемножение векторов",
-        args: [500000, 600000, 700000, 800000],
+        args: [5000000, 6000000, 7000000, 8000000],
         calculatePerformance: function () {
             return measurePerformance(multiplyVector, globalThis.multiplyVector, this.args);
         }
