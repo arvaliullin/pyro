@@ -30,11 +30,17 @@ func multiplyVector(this js.Value, args []js.Value) interface{} {
 	return math.MultiplyVector(a, b, size)
 }
 
+func factorize(this js.Value, args []js.Value) interface{} {
+	n := args[0].Int()
+	return factorize(n)
+}
+
 func main() {
 	fmt.Println("Creating WebAssembly code from Go!")
 	js.Global().Set("fibonacciRecursive", js.FuncOf(fibonacciRecursive))
 	js.Global().Set("fibonacciIterative", js.FuncOf(fibonacciIterative))
 	js.Global().Set("multiply", js.FuncOf(multiply))
 	js.Global().Set("multiplyVector", js.FuncOf(multiplyVector))
+	js.Global().Set("factorize", js.FuncOf(factorize))
 	select {}
 }
