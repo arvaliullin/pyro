@@ -1,15 +1,16 @@
 import { Outlet, Link } from "react-router-dom";
 import { useEffect } from "react";
-
+import "../../performance/performance.js"
 import "../../wasm_exec.js";
+import performanceExperiments from "../../performance/performance.js";
 
 export default function Root() {
   useEffect(() => {
     async function load() {
       const go = new window.Go();
       const result = await WebAssembly.instantiateStreaming(
-        fetch("lib_go.out.wasm"),
-        go.importObject
+          fetch("lib_go.out.wasm"),
+          go.importObject
       );
       await go.run(result.instance);
     }
@@ -23,36 +24,18 @@ export default function Root() {
       <div id="sidebar">
         <nav>
           <ul>
-            <li>
-              <Link to={`experiment/fibonacciRecursive`}>
-                Рекурсивная функция Фибоначи
-              </Link>
-            </li>
-            <li>
-              <Link to={`experiment/fibonacciIterative`}>
-                Итеративная функция Фибоначи
-              </Link>
-            </li>
-            <li>
-              <Link to={`experiment/multiply`}>
-                Функция перемножение целых чисел
-              </Link>
-            </li>
-            <li>
-              <Link to={`experiment/multiplyVector`}>
-                Функция перемножение векторов
-              </Link>
-            </li>
-            <li>
-              <Link to={`experiment/factorize`}>
-                Функция факторизации числа
-              </Link>
-            </li>
+            {Object.entries(performanceExperiments).map(([funcKey, funcData]) => (
+                <li key={funcKey}>
+                  <Link to={`/experiment/${funcKey}`}>
+                    {funcData.experimentName}
+                  </Link>
+                </li>
+            ))}
           </ul>
         </nav>
       </div>
       <div id="detail">
-        <Outlet />
+        <Outlet/>
       </div>
     </>
   );

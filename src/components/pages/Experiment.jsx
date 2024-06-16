@@ -1,27 +1,43 @@
-import { useParams } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useParams} from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import PerformanceTable from "../table/PerfomanceTable.jsx";
 import ChartComponent from "../charts/ChartComponent.jsx";
 
+function Experiment({performanceExperiments}) {
 
-function Experiment() {
-    const tableData = [
-        { N: 10, JavaScript: 50, WebAssembly: 20 },
-        { N: 20, JavaScript: 40, WebAssembly: 15 },
-        { N: 30, JavaScript: 35, WebAssembly: 10 },
-        { N: 40, JavaScript: 30, WebAssembly: 10 },
-        { N: 50, JavaScript: 25, WebAssembly: 5 }
-    ];
+    const {experimentId} = useParams();
+    const [tableData, setTableData] = useState([]);
+    const [stateMessage, setStateMessage] = useState("Начать эксперимент");
 
-    const { experimentId } = useParams();
+    const runPerformanceExperiment = async (experimentId) => {
+        const experiment = performanceExperiments[experimentId];
+        return experiment.calculatePerformance();
+    };
 
-    return (
-        <>
-            <h1> Экперимент {experimentId} </h1>
-            <div className="card">
-                <PerformanceTable tableData={tableData}/>
-                <ChartComponent tableData={tableData} />
-            </div>
-        </>
-    );
+    async function handleRecalculate() {
+        setStateMessage("Идет эксперимент");
+        runPerformanceExperiment(experimentId).then((performanceValues) => {
+            setTableData(performanceValues);
+            setStateMessage("Начать эксперимент");
+        }).catch(() => {
+            setStateMessage("Ошибка");
+        });
+    }
+
+    return (<>
+        <h1>Эксперимент {experimentId}</h1>
+        <button onClick={handleRecalculate}> {stateMessage}</button>
+        <div className="card">
+            <PerformanceTable key="performanceTable" tableData={tableData}/>
+            <ChartComponent key="chartComponent" tableData={tableData}/>
+        </div>
+    </>);
 }
+
+Experiment.propTypes = {
+    performanceExperiments: PropTypes.object.isRequired,
+};
+
 export default Experiment;

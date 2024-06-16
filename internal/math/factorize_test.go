@@ -16,7 +16,7 @@ func TestFactorize(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		result := factorize(c.input)
+		result := Factorize(c.input)
 		if !reflect.DeepEqual(result, c.output) {
 			t.Errorf("factorize(%d) == %v, ожидалось %v", c.input, result, c.output)
 		}

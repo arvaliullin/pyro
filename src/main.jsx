@@ -10,6 +10,7 @@ import './index.css'
 import Root  from "./components/routes/Root.jsx";
 import ErrorPage from "./components/errorPage/ErrorPage.jsx";
 import Experiment from "./components/pages/Experiment.jsx";
+import performanceExperiments from "./performance/performance.js";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "experiment/:experimentId",
-                element: <Experiment />,
+                element: <Experiment performanceExperiments={performanceExperiments} />,
             },
         ],
     },

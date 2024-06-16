@@ -1,4 +1,4 @@
-function factorize(n) {
+export function factorize(n) {
     let factors = [];
     let d = 2;
     while (n > 1) {

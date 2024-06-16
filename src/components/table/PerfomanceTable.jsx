@@ -16,8 +16,8 @@ const PerformanceTable = ({ tableData }) => {
                 {tableData.map(data => (
                     <tr key={data.N}>
                         <td>{data.N}</td>
-                        <td>{data.JavaScript}</td>
-                        <td>{data.WebAssembly}</td>
+                        <td>{(data.JavaScript / 1000).toFixed(2)}</td>
+                        <td>{(data.WebAssembly / 1000).toFixed(2)}</td>
                         <td>{(data.JavaScript / data.WebAssembly).toFixed(2)}</td>
                     </tr>
                 ))}

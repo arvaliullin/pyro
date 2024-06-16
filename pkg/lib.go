@@ -17,22 +17,20 @@ func fibonacciIterative(this js.Value, args []js.Value) interface{} {
 }
 
 func multiply(this js.Value, args []js.Value) interface{} {
-	a := args[0].Int()
-	b := args[1].Int()
-	size := args[2].Int()
-	return math.Multiply(a, b, size)
+	size := args[0].Int()
+	return math.Multiply(size)
 }
 
 func multiplyVector(this js.Value, args []js.Value) interface{} {
-	a := args[0].Int()
-	b := args[1].Int()
-	size := args[2].Int()
-	return math.MultiplyVector(a, b, size)
+	size := args[0].Int()
+	_ = math.MultiplyVector(size)
+	return nil
 }
 
 func factorize(this js.Value, args []js.Value) interface{} {
 	n := args[0].Int()
-	return factorize(n)
+	_ = math.Factorize(n)
+	return nil
 }
 
 func main() {

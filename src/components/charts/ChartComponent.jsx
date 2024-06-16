@@ -1,42 +1,44 @@
-import { VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryStack } from 'victory';
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import {
+    VictoryBar,
+    VictoryChart,
+    VictoryAxis,
+    VictoryLegend,
+    VictoryGroup,
+} from "victory";
 
-const ChartComponent = ({ tableData }) => {
+const ChartComponent = ({tableData}) => {
     return (
-        <div>
-            <VictoryChart
-                domainPadding={{ x: 20 }}
-                theme={VictoryTheme.material}
-            >
-                <VictoryAxis
-                    tickValues={tableData.map(data => data.N)}
-                    tickFormat={(t) => `${t}`}
+        <VictoryChart domainPadding={70} height={300} width={600}>
+            <VictoryLegend
+                x={90}
+                y={20}
+                orientation="horizontal"
+                gutter={20}
+                style={{border: {stroke: "black"}, title: {fontSize: 5}}}
+                colorScale={["#EBC535", "#66D0DD"]}
+                data={[{name: "JavaScript"}, {name: "WebAssembly"}]}
+            />
+            <VictoryAxis dependentAxis tickFormat={(x) => `${x / 1000} ms`} offsetX={70}/>
+            <VictoryGroup offset={40}>
+                <VictoryBar
+                    data={tableData.map((item, index) => ({index: index + 70, ...item}))}
+                    x="index"
+                    y="JavaScript"
+                    style={{data: {fill: "#EBC535"}}}
                 />
-                <VictoryAxis
-                    dependentAxis
-                    tickFormat={(t) => `${t}`}
+                <VictoryBar
+                    data={tableData.map((item, index) => ({index: index + 70, ...item}))}
+                    x="index"
+                    y="WebAssembly"
+                    style={{data: {fill: "#66D0DD"}}}
                 />
-                <VictoryStack colorScale={["green", "blue"]}>
-                    <VictoryBar
-                        data={tableData}
-                        x="N"
-                        y="JavaScript"
-                        barWidth={20}
-                    />
-                    <VictoryBar
-                        data={tableData}
-                        x="N"
-                        y="WebAssembly"
-                        barWidth={20}
-                    />
-                </VictoryStack>
-            </VictoryChart>
-        </div>
+            </VictoryGroup>
+        </VictoryChart>
     );
 };
-
 ChartComponent.propTypes = {
-    tableData: PropTypes.arrayOf(PropTypes.object).isRequired
+    tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ChartComponent;

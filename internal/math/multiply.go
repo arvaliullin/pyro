@@ -1,6 +1,7 @@
 package math
 
-func Multiply(a, b, size int) int {
+func Multiply(size int) int {
+	a, b := 33, 10
 	result := 0
 	for i := 0; i < size; i++ {
 		result = a * b
@@ -8,7 +9,8 @@ func Multiply(a, b, size int) int {
 	return result
 }
 
-func MultiplyVector(a, b, size int) []int {
+func MultiplyVector(size int) []int {
+	a, b := 33, 10
 	aVector := make([]int, size)
 	bVector := make([]int, size)
 	resultVector := make([]int, size)
