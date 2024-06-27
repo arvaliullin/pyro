@@ -1,6 +1,6 @@
 import {factorize} from "../math/factorize.js";
 import {multiply, multiplyVector} from "../math/multiply.js";
-import {fibonacciIterative, fibonacciRecursive} from "../math/fibonacci.js";
+import {fibonacciRecursive} from "../math/fibonacci.js";
 
 function measurePerformance(func1, func2, args) {
 
